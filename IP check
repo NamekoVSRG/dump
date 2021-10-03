@@ -1,0 +1,199 @@
+#include <iostream>
+std::string ip_full_length(std::string ip)
+{
+    int first_part_of_numbers = 0;
+    int second_part_of_numbers = 0;
+    int third_part_of_numbers = 0;
+    int fourth_part_of_numbers = 0;
+    int dots = 0;
+    int one,two,three,sum;
+    for(int i = 0; i < ip.length(); ++i)
+    {
+        bool is_dot = ip[i] == '.';
+        first_part_of_numbers += !is_dot; // How much number in first number (:
+        if(ip[i] == '.') // Range between numbers
+        {
+            dots++;
+            break;
+        }
+    } // Looking for first part of numbers before first dot
+    if(first_part_of_numbers == 3)
+    {
+        one = (ip[0] - '0') * 100;
+        two = (ip[1] - '0') * 10;
+        three = ip[2] - '0';
+        sum = one + two + three;
+        if(ip[0] < '0' || ip[0] > '9' || ip[1] < '0' || ip[1] > '9' || ip[2] < '0' || ip[2] > '9')
+        {
+            std::cout << "First part is not a number!";
+        }
+        else if(sum > 255)
+        {
+            std::cout << "Error, first part of the number is above 255!";
+            return 0;
+        }
+    }
+    if(first_part_of_numbers == 2)
+    {
+        if(ip[0] < '0' || ip[0] > '9' || ip[1] < '0' || ip[1] > '9')
+        {
+            std::cout << "First part is not a number!";
+            return 0;
+        }
+    }
+    if(first_part_of_numbers == 1)
+    {
+        if(ip[0] < '0' || ip[0] > '9')
+        {
+            std::cout << "First part is not a number!";
+            return 0;
+        }
+    }
+    if(dots == 1)
+    {
+        for(int i = first_part_of_numbers + 1; i < ip.length(); i++)
+        {
+
+            bool is_dot = ip[i] == '.';
+            second_part_of_numbers += !is_dot;
+            if(ip[i] == '.') // Range between numbers
+            {
+                dots++;
+                break;
+            }
+        }
+        if(second_part_of_numbers == 3)
+        {
+            one = (ip[first_part_of_numbers + 1] - '0') * 100;
+            two = (ip[first_part_of_numbers + 2] - '0') * 10;
+            three = ip[first_part_of_numbers + 3] - '0';
+            sum = one + two + three;
+            if(ip[first_part_of_numbers + 1] < '0' || ip[first_part_of_numbers + 1] > '9' ||
+                    ip[first_part_of_numbers +2] < '0' || ip[first_part_of_numbers +2] > '9' ||
+                            ip[first_part_of_numbers +3] < '0' || ip[first_part_of_numbers +3] > '9')
+            {
+                std::cout << "Second part is not a number!";
+                return 0;
+            }
+            else if(sum > 255)
+            {
+                std::cout << "Error,second part of the number is above 255!";
+                return 0;
+            }
+        }
+        if(second_part_of_numbers == 2)
+        {
+            if(ip[first_part_of_numbers + 1] < '0' || ip[first_part_of_numbers + 1] > '9' ||
+                    ip[first_part_of_numbers +2] < '0' || ip[first_part_of_numbers +2] > '9')
+            {
+                std::cout << "Second part is not a number!";
+                return 0;
+            }
+        }
+        if(second_part_of_numbers == 1)
+        {
+            if(ip[first_part_of_numbers + 1] < '0' || ip[first_part_of_numbers + 1] > '9')
+            {
+                std::cout << "Second part is not a number!";
+                return 0;
+            }
+        }
+        if(dots == 2)
+        {
+
+            for(int i = first_part_of_numbers + 1 + second_part_of_numbers +  1;
+                    i < ip.length(); i++)
+            {
+                bool is_dot = ip[i] == '.';
+                third_part_of_numbers += !is_dot;
+                if(ip[i] == '.') // Range between numbers
+                {
+                    dots++;
+                    break;
+                }
+            }
+            int index_sum = first_part_of_numbers + second_part_of_numbers + 2;
+            if(third_part_of_numbers == 3)
+            {
+                one = (ip[index_sum] - '0') * 100;
+                two = (ip[index_sum + 1] - '0') * 10;
+                three = ip[index_sum + 2] - '0';
+                sum = one + two + three;
+                if(sum > 255)
+                {
+                    std::cout << "Third part of the IP cannot be above 255!";
+                    return 0;
+                }
+            }
+            if(third_part_of_numbers == 2)
+            {
+                if(ip[index_sum] < '0' || ip[index_sum] > '9' || ip[index_sum + 1] < '0' || ip[index_sum + 1] > '9')
+                {
+                    std::cout << "Third part is not a number!";
+                    return 0;
+                }
+            }
+            if(third_part_of_numbers == 1)
+            {
+                if(ip[index_sum] < '0' || ip[index_sum] > '9')
+                {
+                    std::cout << "Third part of the IP is not a number!";
+                    return 0;
+                }
+            }
+        }
+        if(dots == 3)
+        {
+            int index_sum = first_part_of_numbers + second_part_of_numbers + third_part_of_numbers + 3;
+            for(int i =  index_sum; i < ip.length(); i++)
+            {
+                bool is_dot = ip[i] == '.';
+                fourth_part_of_numbers += !is_dot;
+                if(ip[i] == '.')
+                {
+                    dots++;
+                }
+            }
+            if(fourth_part_of_numbers == 3)
+            {
+                one = (ip[index_sum] - '0') * 100;
+                two = (ip[index_sum + 1] - '0') * 10;
+                three = ip[index_sum + 2] - '0';
+                sum = one + two + three;
+                if(sum > 255){
+                    std::cout << "Fourth part of the IP cannot be above 255!";
+                    return 0;
+                }
+            }
+            if(fourth_part_of_numbers == 2)
+            {
+                if(ip[index_sum] < '0' || ip[index_sum] > '9' || ip[index_sum + 1] < '0' || ip[index_sum + 1] >'9')
+                {
+                    std::cout << "Fourth part of the IP is not a number!";
+                    return 0;
+                }
+            }
+            if(fourth_part_of_numbers == 1)
+            {
+                sum = ip[index_sum] - '0';
+                if(sum > 9 || sum < 0){
+                    std::cout << "Fourth part of the IP is not a number!";
+                    return 0;
+                }
+            }
+        }
+    } // Same thing but after first dot and so on,and so on...
+    if(dots > 3)
+    {
+        std::cout << "Too much dots, staph!";
+        return 0;
+    }
+
+    return "Correct!";
+}
+
+int main(){
+    std::string ip;
+    std::cin >> ip;
+    std::cout << ip_full_length(ip) << std::endl;
+}
