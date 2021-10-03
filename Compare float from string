@@ -1,0 +1,52 @@
+#include <iostream>
+std::string compare_numbers(std::string first,std::string second)
+{
+    int first_index = 0;
+    int second_index = 0;
+    do
+    {
+        first_index++;
+    }
+    while(first[first_index] == '0');
+
+    do
+    {
+        second_index++;
+    }while(second[second_index] == '0');
+
+    for(; first_index < first.length(); first_index++)
+    {
+        if(first[first_index] != '.' && first[first_index] < '0' || first[first_index] > '9')
+        {
+            std::cout << "Syntax error in first number, please try again.";
+            return 0;
+        }
+        for(;second_index < second.length(); second_index++)
+        {
+            if(second[second_index] != '.' && second[second_index] < '0' || second[second_index] > '9')
+            {
+                std::cout << "Syntax error in second number, please try again.";
+                return 0;
+            }
+        }
+    }
+    if(first < second)
+    {
+        return "Less";
+    }
+    else if(first > second)
+    {
+        return "More";
+    }
+    else
+    {
+        return "Equal";
+    }
+}
+
+int main() {
+    std::string first,second;
+    std::cin >> first >> second;
+    std::cout << compare_numbers(first,second) << std::endl;
+    return 0;
+}
