@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+std::string encrypt_cezar(std::string text, int number)
+{
+    for(int i = 0;i<text.length();i++)
+    {
+        if(text[i] != ' ' && text[i] < 'a' && text[i] > 'z')
+        {
+            std::cout << "Error!" << std::endl;
+        }
+        else
+        {
+            char z = text[i] + number;
+            if(text[i] + number > 'z')
+            {
+                char x = (text[i] + number) - 'z';
+                x = 'a' + x -1;
+                std::cout << x;
+            }
+            else if(text[i] == ' ')
+            {
+                std::cout << ' ';
+            }
+            else
+
+                std::cout << z;
+        }
+    }
+    return 0;
+}
+int main() {
+    std::string text;
+    std::getline(std::cin,text);
+    int number;
+    std::cin >> number;
+    std::cout << encrypt_cezar(text, number) << std::endl;
+}
