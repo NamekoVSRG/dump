@@ -1,0 +1,52 @@
+#include <iostream>
+std::string mail_check(std::string mail)
+{
+    int symbols_count_before_at = 0;
+    int symbols_count_after_at = 0;
+    int position_of_at = 0;
+    for(int i = 0; i < mail.length();i++)
+    {
+        bool is_at = mail[i] == '@';
+        symbols_count_before_at += !is_at;
+        int last_index = mail.length() - 1;
+        if(mail[last_index] == '.' || mail[0] == '.' || mail[i] != '!' && mail[i] < '#' || mail[i] > '9' && mail[i] != '=' && mail[i] < '?' || mail[i] > '~') // TO DO
+        {
+            std::cout << "Syntax error, pls try again";
+            return 0;
+        }
+        else if(mail[i] == '.' && mail[i == '.' + 1] == '.')
+        {
+            std::cout << "No double dots!";
+            return 0;
+        }
+        if(symbols_count_before_at > 64 || symbols_count_before_at < 1)
+        {
+            std::cout << "Error, length of the first part of mail is inaccurate";
+            return 0;
+        }
+        else if(mail[i] == '@')
+        {
+            break;
+        }
+    } // Length check
+    for(int i = symbols_count_before_at + 1; i < mail.length();i++)
+    {
+        if(mail[i] == '@')
+        {
+            std::cout << "No, no, no... symbol '@' has to be just one";
+            return 0;
+        }
+        symbols_count_after_at ++;
+        if(symbols_count_after_at > 63 || symbols_count_after_at < 1)
+        {
+            std::cout << "Error, length of the second part of mail is inaccurate";
+            return 0;
+        }
+    }
+    return "Correct!";
+}
+int main(){
+    std::string mail;
+    std::cin >> mail;
+    std::cout << mail_check(mail) << std::endl;
+}
