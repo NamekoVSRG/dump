@@ -7,11 +7,7 @@ int main() {
     {
         for (int e = 0;e < 15; ++e)
         {
-            if(numbers[i] == numbers[e] && i == e)
-            {
-                break;
-            }
-            else if(numbers[i] == numbers[e] && i != e)
+            if(numbers[i] == numbers[e] && i != e)
             {
                 cout << "We have a match!" << i << " and " << e << endl;
                 return 0;
