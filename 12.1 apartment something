@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string house[11];
+    house[0] = "empty";
+    for (int i = 1; i < 11; ++i)
+    {
+        string name;
+        cout << "Enter the name of a new owner of " << i << " apartment" << endl;
+        cin >> name;
+        house[i] += name;
+    }
+    for (int e = 0; e <3; ++e)
+    {
+        int number = 0;
+        cout << "Now, what apartment would you like to check? Numbers are starting at 1, not 0" << endl;
+        cin >> number;
+        if(number < 1 || number > 10)
+        {
+            cout << "There is no such thing as " << number << " apartment" << endl;
+            return 0;
+        }
+        else
+        cout << "In apartment " << number << " lives " << house[number] << endl;
+    }
+}
